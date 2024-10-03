@@ -1,0 +1,52 @@
+import Stripe from "stripe";
+
+export interface User  {
+    id: string;
+    first_name: string;
+    last_name: string;
+    full_name?: string;
+    avatar_url?: string;
+    billing_address?: Stripe.Address;
+    payment_method?: Stripe.PaymentMethod[Stripe.PaymentMethod.Type];
+}
+
+export interface Subscription{
+    id: string;
+    user_id: string;
+    status: Stripe.Subscription.Status;
+    metadata: Stripe.Metadata;
+    price_id: string;
+    quantity?: number;
+    cancel_at_period_end?: boolean;
+    created:string;
+    current_period_start?: number;
+    current_period_end?: number;
+    ended_at?: number;
+    canceled_at?: number;
+    trial_start?: number;
+    trial_end?: number;
+    price?: Price;
+
+}
+export interface Price{
+    id: string;
+    product_id?: string;
+    active?: boolean;
+    description?: string;
+    unit_amount?: number;
+    currency?: string;
+    type?: Stripe.Price.Type;
+    interval?: Stripe.Price.Recurring.Interval;
+    interval_count?: number;
+    trial_period_days?: number;
+    metadata?: Stripe.Metadata;
+    product?: Product;
+}
+export interface Product{
+    id: string;
+    active?: boolean;
+    name: string;
+    description?: string;
+    image?: string;
+    metadata?: Stripe.Metadata;
+}
